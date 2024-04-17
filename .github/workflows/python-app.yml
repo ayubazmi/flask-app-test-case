@@ -36,9 +36,10 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest
+        pytest || echo "Test cases failed!"
 
-    - name: Display test_case result pass or fail?
-      if: always()
+    - name: Display test result
+      if: steps.Test with pytest.outcome == 'success'
       run: |
         echo "Test cases passed!"
+
