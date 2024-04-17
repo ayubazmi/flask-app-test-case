@@ -35,11 +35,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest
-      id: pytest
       run: |
-        pytest || echo "Test cases failed!"
+        pytest
 
-    - name: Display test result
-      if: ${{ steps.pytest.outcome == 'success' }}
+    - name: Display test_case result pass or fail?
+      if: always()
       run: |
         echo "Test cases passed!"
