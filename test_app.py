@@ -15,7 +15,7 @@ class FlaskTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         # Check if the response contains the expected content
         self.assertTrue(b'<title>My Flask App</title>' in response.data)
-        self.assertTrue(b'<h1>Hello, World!</h1>' in response.data)
+        self.assertTrue(b'<h1>Hello, Worl!</h1>' in response.data)
         self.assertTrue(b'<p>Welcome to my Flask app.</p>' in response.data)
 
     def test_about_route(self):
