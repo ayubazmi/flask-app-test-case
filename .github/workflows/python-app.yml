@@ -38,7 +38,7 @@ jobs:
       run: |
         pytest
 
-    - name: Display test result
+    - name: Display test_case result pass or fail?
       if: always()
       run: |
         echo "Test cases passed!"
