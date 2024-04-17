@@ -48,7 +48,9 @@ jobs:
       if: ${{ steps.pytest.outcome == 'success' }}
       run: |
         # Log in to Heroku CLI
-        echo "$HEROKU_API_KEY" | heroku login -i
+        heroku login -i
+        # Check if login was successful
+        heroku auth:whoami || exit 1
         # Create a new Heroku app
         heroku create
         # Deploy the code to Heroku
