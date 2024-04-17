@@ -35,10 +35,21 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest
+      id: pytest
       run: |
-        pytest
+        pytest || exit 1
 
-    - name: Display test_case result pass or fail?
-      if: always()
+    - name: Display test result
+      if: ${{ steps.pytest.outcome == 'success' }}
       run: |
         echo "Test cases passed!"
+      
+    - name: Deploy to Heroku
+      if: ${{ steps.pytest.outcome == 'success' }}
+      run: |
+        # Log in to Heroku CLI
+        echo "$HEROKU_API_KEY" | heroku login -i
+        # Create a new Heroku app
+        heroku create
+        # Deploy the code to Heroku
+        git push heroku main
